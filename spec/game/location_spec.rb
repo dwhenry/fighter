@@ -77,7 +77,7 @@ describe Game::Location do
         it 'return the endpint instead' do
           end_point_tile = Game::Location.build(0, 2, 2)
           up_tile = Game::Location.build(0, 0, 1)
-          up_tile.add(Game::Object.instance('Transport', "end_point" => [2, 2], 'parent' => 'LocationModifier'))
+          up_tile.add(Game::Object.instance('Transport', "end_point" => [2, 2], 'modules' => ['LocationModifier']))
           subject.at(:up).should == end_point_tile
         end
       end
@@ -120,9 +120,9 @@ describe Game::Location do
     end
 
     it 'returns true if an instance of a sub-class of the object class' do
-      object = Game::Object.instance('SubClassOfExit', 'parent' => 'Exit')
+      object = Game::Object.instance('SubClassOfExit', 'modules' => ['LocationModifier'])
       subject.add(object)
-      subject.has_object?(Game::Object::Exit).should be_true
+      subject.has_object?(Game::Object::LocationModifier).should be_true
     end
 
     it 'returns false if tile doesnt have an instance of the object class' do

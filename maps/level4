@@ -1,0 +1,39 @@
+{
+  "name": "4: Look a Door",
+  "goal": "Pick up the key and use the door",
+  "height": 5,
+  "width": 5,
+  "data": [
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [3, 3, 3, 3, 3],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0]
+  ],
+  "objects": [
+    {
+      "name": "Exit",
+      "x": 4,
+      "y": 4
+    },
+    {
+      "name": "Door",
+      "x": 2,
+      "y": 2,
+      "details": {
+        "modules": ["Passage"],
+        "passible?": false,
+        "require": "door_key"
+      }
+    },
+    {
+      "name": "Key",
+      "x": 0,
+      "y": 4,
+      "details": {
+        "modules": ["InventryItem"],
+        "id": "door_key"
+      }
+    }
+  ]
+}

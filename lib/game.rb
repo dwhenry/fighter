@@ -25,7 +25,7 @@ class Game
   def initialize
     @engine = Engine.new
     @render = Render::Console.new
-    @inputs = Input.new(@engine.player)
+    @inputs = Input.new(@engine)
   end
 
   def play

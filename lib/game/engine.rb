@@ -24,6 +24,13 @@ class Game
       end
     end
 
+    def skip_to(name)
+      @map = Game::Map.load_map("maps/#{name}")
+      @player.load_map(@map)
+    rescue NoMethodError
+      @ended = true
+    end
+
     def ended?
       !!@ended
     end

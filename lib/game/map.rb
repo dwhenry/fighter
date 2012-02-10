@@ -13,7 +13,7 @@ class Game
     def setup_objects(objects=@map_data['objects'])
       return unless objects
       objects.each do |object|
-        at(object['x'], object['y']).add Game::Object.instance(object['name'], object['details'])
+        at(object['x'], object['y']).add Game::Object.instance(object['name'], object['details'] || {})
       end
     end
 

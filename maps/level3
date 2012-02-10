@@ -21,19 +21,19 @@
       "x": 0,
       "y": 4,
       "details": {
-        "parent": "LocationModifier",
+        "modules": ["LocationModifier"],
         "end_point": [4, 0]
       }
     },
     {
       "name": "Transport",
-      "parent": "LocationModifier",
       "x": 4,
       "y": 0,
       "details": {
-        "parent": "LocationModifier",
+        "modules": ["LocationModifier"],
         "end_point": [0, 4]
       }
     }
-  ]
+  ],
+  "next": "level4"
 }

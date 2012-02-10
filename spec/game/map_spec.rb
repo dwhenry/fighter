@@ -48,7 +48,7 @@ describe Game::Map do
       subject { Game::Map.new(File.join(File.dirname(__FILE__), '..', 'maps', 'test_map_with_objects')) }
 
       it 'delegates object creation to the Object class' do
-        Game::Object.should_receive(:instance).with('TestObject')
+        Game::Object.should_receive(:instance).with('TestObject', {})
         subject
       end
 

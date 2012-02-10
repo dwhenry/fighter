@@ -3,10 +3,11 @@ class Game
     class << self
       def instance(name, options={})
         unless const_defined?(name)
-          if parent = options['parent']
-            const_set(name, Class.new(const_get(parent)))
-          else
-            const_set(name, Class.new)
+          klass = const_set(name, Class.new)
+          if options['modules']
+            options['modules'].each do |mod|
+              klass.send :include, const_get(mod)
+            end
           end
         end
         const_get(name).new(options)
@@ -15,7 +16,7 @@ class Game
 
     class Exit; end
 
-    class LocationModifier
+    module LocationModifier
       def initialize(options)
         @options = options
       end
@@ -24,5 +25,8 @@ class Game
         @options['end_point'] || raise('No end point set for location modifier')
       end
     end
+
+    module Passage; end
+    module InventryItem; end
   end
 end

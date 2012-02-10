@@ -50,6 +50,8 @@ module Render
       end
       cell = 'XXX' if defined?(Game::Object::Exit) && location.has_object?(Game::Object::Exit)
       cell = 'TTT' if defined?(Game::Object::Transport) && location.has_object?(Game::Object::Transport)
+      cell = 'DDD' if defined?(Game::Object::Door) && location.has_object?(Game::Object::Door)
+      cell = 'KKK' if defined?(Game::Object::Key) && location.has_object?(Game::Object::Key)
       cell[1] = '*' if location.has_object?(Game::Player)
       cell
     end

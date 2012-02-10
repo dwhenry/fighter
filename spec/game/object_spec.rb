@@ -19,7 +19,7 @@ describe Game::Object do
         it 'sets the base class if parent details' do
           # this will fail if the name below is not unique as this results
           # in the object being pre-defined...
-          instance = Game::Object.instance('UniqueTestObject', {'parent' => 'LocationModifier'})
+          instance = Game::Object.instance('UniqueTestObject', {'modules' => ['LocationModifier']})
           instance.class.ancestors.should include(Game::Object::LocationModifier)
         end
       end
@@ -28,7 +28,10 @@ describe Game::Object do
 end
 
 describe Game::Object::LocationModifier do
-  subject { Game::Object::LocationModifier.new('end_point' => [1, 2]) }
+  class LocationModifierTest
+    include Game::Object::LocationModifier
+  end
+  subject { LocationModifierTest.new('end_point' => [1, 2]) }
   it 'takes a details hash' do
     subject
   end
@@ -38,6 +41,6 @@ describe Game::Object::LocationModifier do
   end
 
   it 'raises and error is the end-point is not set' do
-    expect { Game::Object::LocationModifier.new({}).end_point }.to raise_error
+    expect { LocationModifierTest.new({}).end_point }.to raise_error
   end
 end
