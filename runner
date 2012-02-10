@@ -1,0 +1,7 @@
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__)))
+require 'lib/game'
+
+puts 'create game'
+game = Game.new
+puts 'start game'
+game.play

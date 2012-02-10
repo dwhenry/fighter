@@ -1,0 +1,32 @@
+{
+  "name": "3: Transports are kool",
+  "goal": "Navigate to the Exit",
+  "height": 5,
+  "width": 5,
+  "data": [
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [3, 3, 3, 3, 3],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0]
+  ],
+  "objects": [
+    {
+      "name": "Exit",
+      "x": 4,
+      "y": 4
+    },
+    {
+      "name": "Transport",
+      "x": 0,
+      "y": 4,
+      "end_point": {"x": 4, "y": 0}
+    },
+    {
+      "name": "Transport",
+      "x": 4,
+      "y": 0,
+      "end_point": {"x": 0, "y": 4}
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "test_map",
+  "height": 2,
+  "width": 2,
+  "data": [
+    [0, 1],
+    [2, 3]
+  ]
+}

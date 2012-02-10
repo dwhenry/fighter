@@ -1,0 +1,21 @@
+{
+  "name": "2: Follow the path",
+  "goal": "Navigate to the Exit",
+  "height": 5,
+  "width": 5,
+  "data": [
+    [0, 1, 0, 1, 0],
+    [0, 1, 0, 1, 0],
+    [0, 1, 0, 1, 0],
+    [0, 2, 3, 4, 0],
+    [0, 0, 0, 0, 0]
+  ],
+  "objects": [
+    {
+      "name": "Exit",
+      "x": 0,
+      "y": 4
+    }
+  ],
+  "next": "level3"
+}
