@@ -54,9 +54,17 @@ class Game
       tile = self.class.at(@x, @y - 1) if direction == :left
       tile = self.class.at(@x, @y + 1) if direction == :right
 
-      return Game::Location::Edge.instance unless tile
-      tile
+      tile.try(:end_point) || Game::Location::Edge.instance
     end
+
+    def end_point
+      if has_object?(Game::Object::LocationModifier)
+        self.class.at(*get_object(Game::Object::LocationModifier).end_point)
+      else
+        self
+      end
+    end
+    private :end_point
 
     def passible?
       true
@@ -72,6 +80,10 @@ class Game
 
     def has_object?(object_class)
       !!@objects.detect { |object| object.is_a?(object_class) }
+    end
+
+    def get_object(object_class)
+      @objects.detect { |object| object.is_a?(object_class) }
     end
 
     class Edge < Game::Location
