@@ -4,7 +4,7 @@ describe Game do
   let(:player) { mock(:player) }
   let(:engine) { mock(:engine, :map => [:game, :state], :state => 'Game Over', :take_turn => true, :player => player)}
   let(:input) { mock(:input, :read => true) }
-  let(:renderer) { mock(:renderer, :draw => true) }
+  let(:renderer) { mock(:renderer, :draw_map => true, :draw_message => true) }
   before do
     Game::Engine.stub(:new => engine)
     Game::Input.stub(:new => input)
@@ -24,7 +24,7 @@ describe Game do
 
   describe '#play' do
     it 'draws the game state' do
-      renderer.should_receive(:draw).with([:game, :state])
+      renderer.should_receive(:draw_map).with(engine)
       subject.play
     end
 
@@ -33,9 +33,10 @@ describe Game do
       subject.play
     end
 
-    it 'exits immediately when the game state is ended' do
+    it 'draws exit message when game ended' do
+      renderer.should_receive(:draw_message).with(engine)
+      subject.play
       engine.stub(:ended? => true)
-      subject.play.should == "Game Over"
     end
   end
 end

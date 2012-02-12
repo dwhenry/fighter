@@ -12,9 +12,13 @@
   ],
   "objects": [
     {
-      "name": "Exit",
+      "name": "LevelExit",
       "x": 4,
-      "y": 4
+      "y": 4,
+      "details": {
+        "modules": ["Exit"],
+        "next_map": "level5"
+      }
     },
     {
       "name": "Door",
@@ -23,7 +27,7 @@
       "details": {
         "modules": ["Passage"],
         "passible?": false,
-        "require": "door_key"
+        "id": "door_key"
       }
     },
     {
@@ -31,6 +35,7 @@
       "x": 0,
       "y": 4,
       "details": {
+        "name": "Door Key",
         "modules": ["InventryItem"],
         "id": "door_key"
       }

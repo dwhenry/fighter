@@ -1,21 +1,29 @@
+require 'lib/game/player/actions'
+require 'lib/game/player/movements'
+
 class Game
   class Player
-    attr_reader :location
+    include Game::Modules::ObjectManagement
+    include Game::Player::Actions
+    include Game::Player::Movements
+    include Game::Modules::InstanceSetter
 
-    def load_map(map)
-      @location = map.start_location
-      @location.add(self)
+    attr_reader :location
+    attr_reader :objects
+    attr_reader :hp
+
+    def initialize
+      super
+      @objects = []
+      @hp = 100
     end
 
-    def move(direction)
-      new_location = @location.at(direction)
-      if new_location.passible?
-        @location.remove(self)
-        @location = new_location
-        @location.add(self)
+    def damage(hp)
+      if hp >= @hp
+        @hp = 0
+        Game::Engine.instance.end('Unfortunately you died.')
       else
-        # beep or something here
-        print "\a"
+        @hp -= hp
       end
     end
   end

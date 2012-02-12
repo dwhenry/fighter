@@ -1,0 +1,65 @@
+{
+  "name": "7-B: Levels",
+  "goal": "Find a path through the levels",
+  "height": 5,
+  "width": 5,
+  "data": [
+    [0, 0, 0, 0, 0],
+    [3, 3, 3, 3, 3],
+    [0, 0, 0, 0, 0],
+    [3, 3, 3, 3, 3],
+    [0, 0, 0, 0, 0]
+  ],
+  "objects": [
+    {
+      "name": "LevelLift",
+      "x": 4,
+      "y": 0,
+      "details": {
+        "modules": ["Exit"],
+        "next_map": "level7_a",
+        "exit_location": [4, 0]
+      }
+    },
+    {
+      "name": "LevelLift",
+      "x": 2,
+      "y": 2,
+      "details": {
+        "modules": ["Exit"],
+        "next_map": "level7_a",
+        "exit_location": [2, 2]
+      }
+    },
+    {
+      "name": "LevelLift",
+      "x": 4,
+      "y": 2,
+      "details": {
+        "modules": ["Exit"],
+        "next_map": "level7_a",
+        "exit_location": [4, 2]
+      }
+    },
+    {
+      "name": "LevelLift",
+      "x": 0,
+      "y": 4,
+      "details": {
+        "modules": ["Exit"],
+        "next_map": "level7_a",
+        "exit_location": [0, 4]
+      }
+    },
+    {
+      "name": "LevelLift",
+      "x": 2,
+      "y": 4,
+      "details": {
+        "modules": ["Exit"],
+        "next_map": "level7_a",
+        "exit_location": [2, 4]
+      }
+    }
+  ]
+}

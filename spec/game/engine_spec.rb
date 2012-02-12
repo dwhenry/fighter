@@ -15,32 +15,6 @@ describe Game::Engine do
   end
 
   describe '#take_turn' do
-    let(:second_map) { mock(:second_map)}
-
-    it 'should check if on the exit tile' do
-      location.should_receive(:has_object?).with(Game::Object::Exit)
-      subject.take_turn
-    end
-
-    context 'when player is on the Exit tile' do
-      it 'attempts to load the next map' do
-        subject
-        Game::Map.should_receive(:load_map).with("maps/next").and_return(second_map)
-        player.should_receive(:load_map).with(second_map)
-        subject.take_turn
-      end
-
-      it 'sets the ended flag if the load fails' do
-        subject
-        Game::Map.should_receive(:load_map).and_raise(NoMethodError)
-        subject.take_turn
-        subject.should be_ended
-      end
-    end
-
-    it 'does nothing if player is not on the exit tile' do
-      subject.take_turn
-    end
   end
 
   describe '#state' do
@@ -56,6 +30,13 @@ describe Game::Engine do
 
     it 'true when the ended state is set' do
       subject.instance_variable_set('@ended', true)
+      subject.should be_ended
+    end
+  end
+
+  describe '#end' do
+    it 'sets the ended flag' do
+      subject.end('')
       subject.should be_ended
     end
   end

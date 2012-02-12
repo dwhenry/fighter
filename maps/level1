@@ -9,10 +9,13 @@
   ],
   "objects": [
     {
-      "name": "Exit",
+      "name": "LevelExit",
       "x": 1,
-      "y": 1
+      "y": 1,
+      "details": {
+        "modules": ["Exit"],
+        "next_map": "level2"
+      }
     }
-  ],
-  "next": "level2"
+  ]
 }

@@ -1,0 +1,100 @@
+{
+  "name": "5: Switch",
+  "goal": "Which switch is the right one",
+  "height": 5,
+  "width": 5,
+  "data": [
+    [0, 0, 0, 0, 0],
+    [3, 3, 5, 3, 3],
+    [0, 0, 1, 0, 0],
+    [3, 3, 5, 3, 3],
+    [0, 0, 0, 0, 0]
+  ],
+  "objects": [
+    {
+      "name": "LevelExit",
+      "x": 4,
+      "y": 4,
+      "details": {
+        "modules": ["Exit"],
+        "next_map": "level6"
+      }
+    },
+    {
+      "name": "Door",
+      "x": 1,
+      "y": 1,
+      "details": {
+        "modules": ["Passage"],
+        "passible?": false,
+        "id": "door_one"
+      }
+    },
+    {
+      "name": "Door",
+      "x": 1,
+      "y": 3,
+      "details": {
+        "modules": ["Passage"],
+        "passible?": false,
+        "id": "door_two"
+      }
+    },
+    {
+      "name": "Door",
+      "x": 3,
+      "y": 1,
+      "details": {
+        "modules": ["Passage"],
+        "passible?": false,
+        "id": "door_three"
+      }
+    },
+    {
+      "name": "Door",
+      "x": 3,
+      "y": 3,
+      "details": {
+        "modules": ["Passage"],
+        "passible?": false,
+        "id": "door_four"
+      }
+    },
+    {
+      "name": "Switch",
+      "x": 0,
+      "y": 2,
+      "details": {
+        "modules": ["Switcher"],
+        "toggle": ["door_one", "door_two"]
+      }
+    },
+    {
+      "name": "Switch",
+      "x": 2,
+      "y": 1,
+      "details": {
+        "modules": ["Switcher"],
+        "toggle": ["door_one", "door_four"]
+      }
+    },
+    {
+      "name": "Switch",
+      "x": 2,
+      "y": 3,
+      "details": {
+        "modules": ["Switcher"],
+        "toggle": ["door_two", "door_three"]
+      }
+    },
+    {
+      "name": "SetSwitch",
+      "x": 2,
+      "y": 0,
+      "details": {
+        "modules": ["Setter"],
+        "close": ["door_one"]
+      }
+    }
+  ]
+}

@@ -1,12 +1,19 @@
 class Game
   class Engine
-    attr_reader :state, :player
+    include Game::Modules::InstanceSetter
+
+    attr_reader :state, :player, :message
 
     def initialize
-      @map = Game::Map.load_map('maps/level1')
+      super
       @state = 'Running'
       @player = Player.new
-      @player.load_map(@map)
+      load_map Game::Map.load_map('maps/level1')
+    end
+
+    def load_map(map)
+      @map = map
+      @player.load_map @map
     end
 
     def map
@@ -14,25 +21,15 @@ class Game
     end
 
     def take_turn
-      if @player.location.has_object?(Game::Object::Exit)
-        begin
-          @map = Game::Map.load_map("maps/#{@map.next}")
-          @player.load_map(@map)
-        rescue NoMethodError
-          @ended = true
-        end
-      end
-    end
-
-    def skip_to(name)
-      @map = Game::Map.load_map("maps/#{name}")
-      @player.load_map(@map)
-    rescue NoMethodError
-      @ended = true
     end
 
     def ended?
       !!@ended
+    end
+
+    def end(message)
+      @ended = true
+      @message = message
     end
   end
 end

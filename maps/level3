@@ -12,9 +12,13 @@
   ],
   "objects": [
     {
-      "name": "Exit",
+      "name": "LevelExit",
       "x": 4,
-      "y": 4
+      "y": 4,
+      "details": {
+        "modules": ["Exit"],
+        "next_map": "level4"
+      }
     },
     {
       "name": "Transport",
@@ -34,6 +38,5 @@
         "end_point": [0, 4]
       }
     }
-  ],
-  "next": "level4"
+  ]
 }

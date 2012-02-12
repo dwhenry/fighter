@@ -1,0 +1,150 @@
+{
+  "name": "6: Traps",
+  "goal": "Beware of the the traps",
+  "height": 5,
+  "width": 5,
+  "data": [
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0]
+  ],
+  "objects": [
+    {
+      "name": "LevelExit",
+      "x": 4,
+      "y": 4,
+      "details": {
+        "modules": ["Exit"],
+        "next_map": "level7_a"
+      }
+    },
+   {
+      "name": "Thorn",
+      "x": 0,
+      "y": 2,
+      "details": {
+        "modules": ["Trap"],
+        "damage": 25
+      }
+    },
+   {
+      "name": "Thorn",
+      "x": 0,
+      "y": 4,
+      "details": {
+        "modules": ["Trap"],
+        "damage": 25
+      }
+    },
+    {
+      "name": "Thorn",
+      "x": 1,
+      "y": 0,
+      "details": {
+        "modules": ["Trap"],
+        "damage": 25
+      }
+    },
+   {
+      "name": "Thorn",
+      "x": 1,
+      "y": 1,
+      "details": {
+        "modules": ["Trap"],
+        "damage": 25
+      }
+    },
+   {
+      "name": "Thorn",
+      "x": 1,
+      "y": 2,
+      "details": {
+        "modules": ["Trap"],
+        "damage": 25
+      }
+    },
+   {
+      "name": "Thorn",
+      "x": 1,
+      "y": 3,
+      "details": {
+        "modules": ["Trap"],
+        "damage": 25
+      }
+    },
+   {
+      "name": "Thorn",
+      "x": 2,
+      "y": 1,
+      "details": {
+        "modules": ["Trap"],
+        "damage": 25
+      }
+    },
+   {
+      "name": "Thorn",
+      "x": 2,
+      "y": 3,
+      "details": {
+        "modules": ["Trap"],
+        "damage": 25
+      }
+    },
+   {
+      "name": "Thorn",
+      "x": 2,
+      "y": 4,
+      "details": {
+        "modules": ["Trap"],
+        "damage": 25
+      }
+    },
+   {
+      "name": "Thorn",
+      "x": 3,
+      "y": 0,
+      "details": {
+        "modules": ["Trap"],
+        "damage": 25
+      }
+    },
+   {
+      "name": "Thorn",
+      "x": 3,
+      "y": 1,
+      "details": {
+        "modules": ["Trap"],
+        "damage": 25
+      }
+    },
+   {
+      "name": "Thorn",
+      "x": 3,
+      "y": 2,
+      "details": {
+        "modules": ["Trap"],
+        "damage": 25
+      }
+    },
+   {
+      "name": "Thorn",
+      "x": 4,
+      "y": 1,
+      "details": {
+        "modules": ["Trap"],
+        "damage": 25
+      }
+    },
+   {
+      "name": "Thorn",
+      "x": 4,
+      "y": 3,
+      "details": {
+        "modules": ["Trap"],
+        "damage": 25
+      }
+    }
+  ]
+}
