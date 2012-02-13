@@ -16,8 +16,8 @@ describe Game::Map do
 
   describe '#data' do
     it 'returns the board elements mapped to Game::Locations' do
-      subject.data.should == [[Game::Location.new(0, 0, 0), Game::Location.new(1, 0, 1)],
-                              [Game::Location.new(2, 1, 0), Game::Location.new(3, 1, 1)]]
+      subject.data.should == [[Game::Location::Empty.new(0, 0, 0), Game::Location::Empty.new(1, 0, 1)],
+                              [Game::Location::Empty.new(2, 1, 0), Game::Location::Empty.new(3, 1, 1)]]
     end
   end
 

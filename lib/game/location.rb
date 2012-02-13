@@ -1,14 +1,13 @@
 require 'lib/game/location/modules'
-require 'lib/game/location/wall'
+require 'lib/game/location/movement'
+require 'lib/game/location/passible'
+
 require 'lib/game/location/edge'
+require 'lib/game/location/empty'
+require 'lib/game/location/wall'
 
 class Game
   class Location
-    include Game::Modules::ObjectManagement
-    include Game::Location::Base
-    include Game::Location::Passible
-    include Game::Location::Movement
-
     EMPTY_CELL = 0
     WALL_90 = 1
     WALL_CORNER_LEFT = 4
@@ -28,7 +27,7 @@ class Game
              WALL_CORNER_LEFT, WALL_CORNER
           Wall
         when EMPTY_CELL
-          self
+          Empty
         else
           raise 'unknown???'
         end

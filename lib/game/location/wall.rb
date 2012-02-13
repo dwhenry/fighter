@@ -9,9 +9,9 @@ class Game
         return false unless has_object?(Game::Object::Passage)
         passage = get_object(Game::Object::Passage)
         return true if passage.passible?
+
         key = player_objects.detect{|obj| obj.id == passage.id}
-        passage.open if key
-        key.try(:use)
+        passage.open if key.try(:use)
       end
     end
   end
