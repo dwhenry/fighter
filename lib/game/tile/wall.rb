@@ -1,9 +1,9 @@
 class Game
-  class Location
+  class Tile
     class Wall
       include Game::Modules::ObjectManagement
-      include Game::Location::Base
-      include Game::Location::Movement
+      include Game::Tile::Base
+      include Game::Tile::Movement
 
       def passible?(player_objects)
         return false unless has_object?(Game::Object::Passage)

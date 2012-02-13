@@ -2,7 +2,7 @@ class Game
   class Object
     module Default
       def self.included(base)
-        base.send :attr_accessor, :location
+        base.send :attr_accessor, :tile
       end
 
       def initialize(options)

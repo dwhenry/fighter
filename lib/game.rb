@@ -6,7 +6,7 @@ require 'lib/game/engine'
 require 'lib/game/input'
 require 'lib/game/player'
 require 'lib/game/map'
-require 'lib/game/location'
+require 'lib/game/tile'
 require 'lib/game/object'
 
 require 'json'

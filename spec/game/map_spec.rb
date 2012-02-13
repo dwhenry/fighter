@@ -15,9 +15,9 @@ describe Game::Map do
   end
 
   describe '#data' do
-    it 'returns the board elements mapped to Game::Locations' do
-      subject.data.should == [[Game::Location::Empty.new(0, 0, 0), Game::Location::Empty.new(1, 0, 1)],
-                              [Game::Location::Empty.new(2, 1, 0), Game::Location::Empty.new(3, 1, 1)]]
+    it 'returns the board elements mapped to Game::Tiles' do
+      subject.data.should == [[Game::Tile::Empty.new(0, 0, 0), Game::Tile::Empty.new(1, 0, 1)],
+                              [Game::Tile::Empty.new(2, 1, 0), Game::Tile::Empty.new(3, 1, 1)]]
     end
   end
 
@@ -33,9 +33,9 @@ describe Game::Map do
     end
   end
 
-  describe '#start_location' do
+  describe '#start_tile' do
     it 'returns the tile at 0,0 by default' do
-      subject.start_location.should == subject.at(0, 0)
+      subject.start_tile.should == subject.at(0, 0)
     end
   end
 
@@ -53,7 +53,7 @@ describe Game::Map do
         subject
       end
 
-      it 'add an instance of the object to the map location' do
+      it 'add an instance of the object to the map tile' do
         subject.at(1, 0).should have_object(Game::Object::TestObject)
       end
     end

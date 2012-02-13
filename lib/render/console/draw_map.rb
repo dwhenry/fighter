@@ -8,7 +8,7 @@ module Render
         draw_board(engine.map.data)
         draw_stats(engine.player)
         draw_player(engine.player)
-        draw_tile(engine.player.location)
+        draw_tile(engine.player.tile)
 
         system('clear')
         @io.puts @output
@@ -66,7 +66,7 @@ module Render
 
       def draw_tile(tile)
         objects = tile.objects.dup
-        append "Location: "
+        append "Tile: "
         append "  ", tile.class
         append "Items: "
         objects.each do |obj|

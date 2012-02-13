@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Game::Location::Wall do
+describe Game::Tile::Wall do
   describe '#passible?' do
-    subject { Game::Location::Wall.new(0, 0, 0) }
+    subject { Game::Tile::Wall.new(0, 0, 0) }
     let(:passage) { Game::Object.instance('TestWallPassage', 'modules' => ['Passage'], 'passible?' => false, 'id' => 'door_key') }
     let(:key) { Game::Object.instance('TestWallPassageKey', 'modules' => ['InventryItem'], 'id' => 'door_key') }
 
@@ -40,11 +40,11 @@ describe Game::Location::Wall do
   end
 
   describe 'feature testing' do
-    let(:start) { Game::Location.build(0, 0, 0) }
-    let(:wall) { Game::Location.build(Game::Location::WALL_0, 1, 0) }
-    let(:stop) { Game::Location.build(0, 2, 0) }
+    let(:start) { Game::Tile.build(0, 0, 0) }
+    let(:wall) { Game::Tile.build(Game::Tile::WALL_0, 1, 0) }
+    let(:stop) { Game::Tile.build(0, 2, 0) }
     let(:player) { Game::Player.new }
-    let(:map) { mock(:map, :start_location => start) }
+    let(:map) { mock(:map, :start_tile => start) }
     let(:passage) { Game::Object.instance('FeaturePassage', 'modules' => ['Passage'], 'id' => 'feature_key') }
     let(:key) { Game::Object.instance('FeatureKey', 'modules' => ['InventryItem'], 'id' => 'feature_key') }
 
@@ -57,16 +57,16 @@ describe Game::Location::Wall do
       player.add(key)
       player.load_map(map)
       player.move(:down)
-      player.location.should == wall
+      player.tile.should == wall
       player.move(:down)
-      player.location.should == stop
+      player.tile.should == stop
     end
 
     it 'passing the wall drops the key' do
       player.add(key)
       player.load_map(map)
       player.move(:down)
-      player.location.should == wall
+      player.tile.should == wall
       player.should_not have_object(Game::Object::FeatureKey)
     end
 

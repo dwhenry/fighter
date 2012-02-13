@@ -25,7 +25,7 @@
       "x": 0,
       "y": 4,
       "details": {
-        "modules": ["LocationModifier"],
+        "modules": ["TileModifier"],
         "end_point": [4, 0]
       }
     },
@@ -34,7 +34,7 @@
       "x": 4,
       "y": 0,
       "details": {
-        "modules": ["LocationModifier"],
+        "modules": ["TileModifier"],
         "end_point": [0, 4]
       }
     }

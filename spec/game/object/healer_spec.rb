@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Game::Object::Healer do
   subject { Game::Object.instance('HealerTest', 'modules' => ['Healer'], 'health' => 50) }
   let(:player) { mock(:player, :heal => 25) }
-  let(:location) { Game::Location.build(0, 0, 0) }
+  let(:tile) { Game::Tile.build(0, 0, 0) }
 
   before do
     Game::Player.stub(:instance => player)
@@ -20,9 +20,9 @@ describe Game::Object::Healer do
   end
 
   it 'removes the object once all healing power has been used up' do
-    location.add(subject)
+    tile.add(subject)
     player.stub(:heal => 50)
     subject.auto_process
-    location.should_not have_object(Game::Object::Healer)
+    tile.should_not have_object(Game::Object::Healer)
   end
 end

@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Game::Player do
-  let(:map) { mock(:map, :start_location => location) }
-  let(:location) { mock(:location, :add => true, :remove => true) }
+  let(:map) { mock(:map, :start_tile => tile) }
+  let(:tile) { mock(:tile, :add => true, :remove => true) }
 
   it 'sets an initial health' do
     subject.hp.should == 100

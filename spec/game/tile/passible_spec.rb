@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Game::Location::Passible do
-  subject { Game::Location.build(0, 0, 0) }
+describe Game::Tile::Passible do
+  subject { Game::Tile.build(0, 0, 0) }
 
   describe '#passible?' do
     context 'when no objects' do
@@ -11,8 +11,8 @@ describe Game::Location::Passible do
     end
 
     context 'when objects' do
-      let(:passible) { mock(:object, :location= => true, :passible? => true) }
-      let(:impassible) { mock(:object, :location= => true, :passible? => false) }
+      let(:passible) { mock(:object, :tile= => true, :passible? => true) }
+      let(:impassible) { mock(:object, :tile= => true, :passible? => false) }
 
       it 'true when all objects are passible' do
         subject.add(passible)

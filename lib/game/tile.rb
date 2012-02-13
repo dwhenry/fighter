@@ -1,13 +1,13 @@
-require 'lib/game/location/modules'
-require 'lib/game/location/movement'
-require 'lib/game/location/passible'
+require 'lib/game/tile/modules'
+require 'lib/game/tile/movement'
+require 'lib/game/tile/passible'
 
-require 'lib/game/location/edge'
-require 'lib/game/location/empty'
-require 'lib/game/location/wall'
+require 'lib/game/tile/edge'
+require 'lib/game/tile/empty'
+require 'lib/game/tile/wall'
 
 class Game
-  class Location
+  class Tile
     EMPTY_CELL = 0
     WALL_90 = 1
     WALL_CORNER_LEFT = 4
@@ -16,13 +16,13 @@ class Game
     WALL_0 = 3
 
     class << self
-      def build(location_type, x, y)
+      def build(tile_type, x, y)
         @board ||= {}
-        @board[[x, y]] = class_for(location_type).new(location_type, x, y)
+        @board[[x, y]] = class_for(tile_type).new(tile_type, x, y)
       end
 
-      def class_for(location_type)
-        case location_type
+      def class_for(tile_type)
+        case tile_type
         when WALL_0, WALL_90, WALL_CORNER_RIGHT,
              WALL_CORNER_LEFT, WALL_CORNER
           Wall

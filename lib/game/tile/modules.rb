@@ -1,5 +1,5 @@
 class Game
-  class Location
+  class Tile
     module Impassible
       def passible?(player_objects)
         false
@@ -14,19 +14,19 @@ class Game
 
     module Base
       def self.included(base)
-        base.send :attr_accessor, :location_type
+        base.send :attr_accessor, :tile_type
         base.send :attr_reader, :objects, :x, :y
       end
 
-      def initialize(location_type, x, y)
-        @location_type = location_type
+      def initialize(tile_type, x, y)
+        @tile_type = tile_type
         @x = x
         @y = y
         @objects = []
       end
 
       def ==(val)
-        location_type == val.location_type &&
+        tile_type == val.tile_type &&
         x == val.x &&
         y == val.y
       end

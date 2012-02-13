@@ -4,7 +4,7 @@ class Game
       def auto_process
         if @options['next_map']
           skip_to next_map
-          move_to if @options["exit_location"]
+          move_to if @options["exit_tile"]
         else
           Game::Engine.instance.end('Congratulations you have Won.')
         end
@@ -21,7 +21,7 @@ class Game
       end
 
       def move_to
-        Game::Player.instance.move_to(Game::Location.at(*exit_location))
+        Game::Player.instance.move_to(Game::Tile.at(*exit_tile))
       end
       private :move_to
     end

@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe Render::Console::DrawMap do
   let(:string_io) { StringIO.new }
-  let(:location) { Game::Location.build(Game::Location::EMPTY_CELL, 0, 0) }
-  let(:wall_location) { Game::Location.build(Game::Location::WALL_0, 0, 1) }
-  let(:player) { mock(:player, :objects => [], :hp => 100, :location => location) }
+  let(:tile) { Game::Tile.build(Game::Tile::EMPTY_CELL, 0, 0) }
+  let(:wall_tile) { Game::Tile.build(Game::Tile::WALL_0, 0, 1) }
+  let(:player) { mock(:player, :objects => [], :hp => 100, :tile => tile) }
   let(:engine) { mock(:engine, :map => map, :player => player) }
-  let(:map) { mock(:map, :name => 'Test map', :goal => 'pass a test', :data => [[location],[wall_location]]) }
+  let(:map) { mock(:map, :name => 'Test map', :goal => 'pass a test', :data => [[tile],[wall_tile]]) }
   subject { Render::Console.new(string_io) }
 
   before do
@@ -14,7 +14,7 @@ describe Render::Console::DrawMap do
   end
 
   def output(element=nil)
-    wall_location.location_type = element if element
+    wall_tile.tile_type = element if element
     subject.draw_map(engine)
 
     string_io.rewind
@@ -46,29 +46,29 @@ describe Render::Console::DrawMap do
       end
 
       it 'draws a 90 degree wall' do
-        output(Game::Location::WALL_90).should include "| | |"
+        output(Game::Tile::WALL_90).should include "| | |"
       end
 
       it 'draws a 0 degree wall' do
-        output(Game::Location::WALL_0).should include "|---|"
+        output(Game::Tile::WALL_0).should include "|---|"
       end
 
       it 'draws a right corner wall' do
-        output(Game::Location::WALL_CORNER_RIGHT).should include "| +-|"
+        output(Game::Tile::WALL_CORNER_RIGHT).should include "| +-|"
       end
 
       it 'draws a left corner' do
-        output(Game::Location::WALL_CORNER_LEFT).should include "|-+ |"
+        output(Game::Tile::WALL_CORNER_LEFT).should include "|-+ |"
       end
 
       it 'draws a corner' do
-        output(Game::Location::WALL_CORNER).should include "|-+-|"
+        output(Game::Tile::WALL_CORNER).should include "|-+-|"
       end
     end
 
     context 'overwrites a tile with object' do
       let(:exit) { Game::Object.instance("LevelExit", 'modules' => ['Exit']) }
-      let(:transport) { Game::Object.instance("RenderTransport", 'modules' => ['LocationModifier']) }
+      let(:transport) { Game::Object.instance("RenderTransport", 'modules' => ['TileModifier']) }
       let(:closed_door) { Game::Object.instance("RenderClosedDoor", 'modules' => ['Passage'], 'passible?' => false)}
       let(:open_door) { Game::Object.instance("RenderClosedDoor", 'modules' => ['Passage'], 'passible?' => true)}
       let(:switcher) { Game::Object.instance("RenderSwitcher", 'modules' => ['Switcher'], 'passible?' => true)}
@@ -76,78 +76,78 @@ describe Render::Console::DrawMap do
       let(:trap) { Game::Object.instance("RenderTrap", 'modules' => ['Trap'], 'damage' => 25)}
 
       it 'when player is on the tile' do
-        location.add(Game::Player.new)
+        tile.add(Game::Player.new)
         output.should include "| * |"
       end
 
       it 'when the tile is the exit' do
-        location.add(exit)
+        tile.add(exit)
         output.should include "|EEE|"
       end
 
       it 'when the tile is the exit and the player is on it' do
-        location.add(Game::Player.new)
-        location.add(exit)
+        tile.add(Game::Player.new)
+        tile.add(exit)
         output.should include "|E*E|"
       end
 
       it 'when the tile is a transport' do
-        location.add(transport)
+        tile.add(transport)
         output.should include "|TTT|"
       end
 
       it 'when the tile is a transport and the player is on it' do
-        location.add(Game::Player.new)
-        location.add(transport)
+        tile.add(Game::Player.new)
+        tile.add(transport)
         output.should include "|T*T|"
       end
 
       it 'when the tile is a door' do
-        wall_location.add(closed_door)
-        output(Game::Location::WALL_0).should include "|DDD|"
+        wall_tile.add(closed_door)
+        output(Game::Tile::WALL_0).should include "|DDD|"
       end
 
       it 'when the tile is an open door' do
-        wall_location.add(open_door)
-        output(Game::Location::WALL_0).should include "|D D|"
+        wall_tile.add(open_door)
+        output(Game::Tile::WALL_0).should include "|D D|"
       end
 
       it 'when the tile is an open door and the player is on it' do
-        wall_location.add(Game::Player.new)
-        wall_location.add(open_door)
-        output(Game::Location::WALL_0).should include "|D*D|"
+        wall_tile.add(Game::Player.new)
+        wall_tile.add(open_door)
+        output(Game::Tile::WALL_0).should include "|D*D|"
       end
 
       it 'when the tile is a switcher' do
-        location.add(switcher)
+        tile.add(switcher)
         output.should include "|SSS|"
       end
 
       it 'when the tile is a switcher and the player is on it' do
-        location.add(Game::Player.new)
-        location.add(switcher)
+        tile.add(Game::Player.new)
+        tile.add(switcher)
         output.should include "|S*S|"
       end
 
       it 'when the tile is a setter' do
-        location.add(setter)
+        tile.add(setter)
         output.should include "|SSS|"
       end
 
       it 'when the tile is a switcher and the player is on it' do
-        location.add(Game::Player.new)
-        location.add(setter)
+        tile.add(Game::Player.new)
+        tile.add(setter)
         output.should include "|S*S|"
       end
 
       it 'when the tile is a trap' do
-        location.add(trap)
+        tile.add(trap)
         output.should include "|###|"
       end
 
       it 'when the tile is a trap and the player is on it' do
-        location.add(Game::Player.new)
-        location.add(trap)
+        tile.add(Game::Player.new)
+        tile.add(trap)
         output.should include "|#*#|"
       end
     end

@@ -1,8 +1,8 @@
 class Game
-  class Location
+  class Tile
     class Edge
-      include Game::Location::Base
-      include Game::Location::Impassible
+      include Game::Tile::Base
+      include Game::Tile::Impassible
 
       def self.instance
         @self ||= new

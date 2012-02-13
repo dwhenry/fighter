@@ -17,8 +17,8 @@ describe Game::Object do
 
       context 'takes optional details hash' do
         it 'sets the base class if parent details' do
-          instance = Game::Object.instance('UniqueTestObject', {'modules' => ['LocationModifier']})
-          instance.class.ancestors.should include(Game::Object::LocationModifier)
+          instance = Game::Object.instance('UniqueTestObject', {'modules' => ['TileModifier']})
+          instance.class.ancestors.should include(Game::Object::TileModifier)
         end
       end
 

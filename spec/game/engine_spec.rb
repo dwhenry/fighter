@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Game::Engine do
   let(:first_map) { mock(:first_map, :next => "next")}
-  let(:location) { mock(:location, :has_object? => true)}
-  let(:player) { mock(:player, :load_map => true, :location => location) }
+  let(:tile) { mock(:tile, :has_object? => true)}
+  let(:player) { mock(:player, :load_map => true, :tile => tile) }
   before do
     Game::Map.stub(:load_map => first_map)
     Game::Player.stub(:new => player)

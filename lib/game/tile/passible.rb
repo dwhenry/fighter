@@ -1,5 +1,5 @@
 class Game
-  class Location
+  class Tile
     module Passible
       def passible?(player_objects)
         objects.all?(&:passible?)

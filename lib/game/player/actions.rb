@@ -3,7 +3,7 @@ class Game
     module Actions
       def take_action
         objects_to_pick_up.each do |obj|
-          location.remove(obj)
+          tile.remove(obj)
           add(obj)
         end
         objects_to_responding_to(:process).each do |obj|
@@ -18,12 +18,12 @@ class Game
       end
 
       def objects_to_pick_up
-        location.objects.select {|obj| obj.is_a?(Game::Object::InventryItem) }
+        tile.objects.select {|obj| obj.is_a?(Game::Object::InventryItem) }
       end
       private :objects_to_pick_up
 
       def objects_to_responding_to(method)
-        location.objects.select {|obj| obj.respond_to?(method) }
+        tile.objects.select {|obj| obj.respond_to?(method) }
       end
       private :objects_to_responding_to
     end

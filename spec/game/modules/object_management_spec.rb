@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Game::Modules::ObjectManagement do
   let(:exit) { Game::Object.instance('LevelExit', 'modules' => ['Exit']) }
-  subject { Game::Location.build(0, 0, 0) }
+  subject { Game::Tile.build(0, 0, 0) }
 
   describe '#add' do
     it 'adds an object to the object list for the tile' do
@@ -26,9 +26,9 @@ describe Game::Modules::ObjectManagement do
     end
 
     it 'returns true if an instance of a sub-class of the object class' do
-      object = Game::Object.instance('SubClassOfExit', 'modules' => ['LocationModifier'])
+      object = Game::Object.instance('SubClassOfExit', 'modules' => ['TileModifier'])
       subject.add(object)
-      subject.has_object?(Game::Object::LocationModifier).should be_true
+      subject.has_object?(Game::Object::TileModifier).should be_true
     end
 
     it 'returns false if tile doesnt have an instance of the object class' do

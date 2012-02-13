@@ -9,7 +9,7 @@ module Render
         end
 
         def draw
-          if tile.is_a?(Game::Location::Wall)
+          if tile.is_a?(Game::Tile::Wall)
             draw_player(draw_wall)
           else
             draw_player(draw_empty)
@@ -39,7 +39,7 @@ module Render
             Game::Object::Switcher          => 'SSS',
             Game::Object::Setter            => 'SSS',
             Game::Object::Exit              => 'EEE',
-            Game::Object::LocationModifier  => 'TTT',
+            Game::Object::TileModifier  => 'TTT',
             Game::Object::Trap              => '###',
 
             Game::Object::Enemy             => '|:P',
@@ -61,12 +61,12 @@ module Render
           end
 
           base = {
-            Game::Location::WALL_90           => ' | ',
-            Game::Location::WALL_CORNER_RIGHT => ' +-',
-            Game::Location::WALL_CORNER_LEFT  => '-+ ',
-            Game::Location::WALL_0            => '---',
-            Game::Location::WALL_CORNER       => '-+-'
-          }[tile.location_type] || (debugger)
+            Game::Tile::WALL_90           => ' | ',
+            Game::Tile::WALL_CORNER_RIGHT => ' +-',
+            Game::Tile::WALL_CORNER_LEFT  => '-+ ',
+            Game::Tile::WALL_0            => '---',
+            Game::Tile::WALL_CORNER       => '-+-'
+          }[tile.tile_type] || (debugger)
         end
       end
     end

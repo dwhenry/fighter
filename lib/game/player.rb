@@ -8,7 +8,7 @@ class Game
     include Game::Player::Movements
     include Game::Modules::InstanceSetter
 
-    attr_accessor :location
+    attr_accessor :tile
     attr_reader :objects
     attr_reader :hp
 

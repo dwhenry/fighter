@@ -18,7 +18,7 @@
       "details": {
         "modules": ["Exit"],
         "next_map": "level7_a",
-        "exit_location": [4, 0]
+        "exit_tile": [4, 0]
       }
     },
     {
@@ -28,7 +28,7 @@
       "details": {
         "modules": ["Exit"],
         "next_map": "level7_a",
-        "exit_location": [2, 2]
+        "exit_tile": [2, 2]
       }
     },
     {
@@ -38,7 +38,7 @@
       "details": {
         "modules": ["Exit"],
         "next_map": "level7_a",
-        "exit_location": [4, 2]
+        "exit_tile": [4, 2]
       }
     },
     {
@@ -48,7 +48,7 @@
       "details": {
         "modules": ["Exit"],
         "next_map": "level7_a",
-        "exit_location": [0, 4]
+        "exit_tile": [0, 4]
       }
     },
     {
@@ -58,7 +58,7 @@
       "details": {
         "modules": ["Exit"],
         "next_map": "level7_a",
-        "exit_location": [2, 4]
+        "exit_tile": [2, 4]
       }
     }
   ]

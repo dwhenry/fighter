@@ -7,15 +7,15 @@ class Game
 
       def load_map(map)
         @map = map
-        @location = @map.start_location
-        @location.add(self)
+        @tile = @map.start_tile
+        @tile.add(self)
       end
 
       def move(direction)
         @direction = direction
-        new_location = @location.at(direction)
-        if new_location.passible?(objects)
-          move_to new_location
+        new_tile = @tile.at(direction)
+        if new_tile.passible?(objects)
+          move_to new_tile
           take_auto_action
         else
           # beep or something here
@@ -23,10 +23,10 @@ class Game
         end
       end
 
-      def move_to(location)
-        @location.remove(self)
-        @location = location
-        @location.add(self)
+      def move_to(tile)
+        @tile.remove(self)
+        @tile = tile
+        @tile.add(self)
       end
     end
   end

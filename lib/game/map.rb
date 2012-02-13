@@ -34,18 +34,18 @@ class Game
       super
     end
 
-    def start_location
+    def start_tile
       at(0, 0)
     end
 
     private
     def build_data
-      Game::Location.clear
+      Game::Tile.clear
       map = []
       @map_data['data'].each_with_index do |row, x|
         row_items = []
-        row.each_with_index do |location, y|
-          row_items << Game::Location.build(location, x, y)
+        row.each_with_index do |tile, y|
+          row_items << Game::Tile.build(tile, x, y)
         end
         map << row_items
       end
