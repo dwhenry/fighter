@@ -27,5 +27,15 @@ describe Game::Object do
         Game::Object.objects.should include(passage)
       end
     end
+
+    describe '#add' do
+      before { Game::Object.clear }
+
+      it 'adds the object to the list of engine run objects' do
+        Game::Object.add('test_map', Game::Object::IDLE, :object_here)
+
+        Game::Object.engine_objects('test_map').should == {Game::Object::IDLE => [:object_here], Game::Object::ACTIVE => []}
+      end
+    end
   end
 end

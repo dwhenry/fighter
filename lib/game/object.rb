@@ -14,6 +14,9 @@ require 'lib/game/object/weapon'
 
 class Game
   class Object
+    IDLE = :idle
+    ACTIVE = :active
+
     class << self
       def instance(name, options={})
         unless const_defined?(name)
@@ -36,6 +39,22 @@ class Game
 
       def objects
         @objects ||= []
+      end
+
+      def engine_objects(level)
+        @game_objects ||= {}
+        @game_objects[level] ||= {Game::Object::IDLE => [],
+                                  Game::Object::ACTIVE => []}
+        @game_objects[level]
+      end
+
+      def add(level, status, obj)
+        engine_objects(level)[status] << obj
+      end
+
+      def clear
+        @game_objects = {}
+        @objects = []
       end
     end
   end

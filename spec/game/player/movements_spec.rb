@@ -25,25 +25,25 @@ describe Game::Player::Movements do
     end
 
     it 'delegates the movement to the current tile' do
-      tile.should_receive(:at).with(:up)
-      subject.move(:up)
+      tile.should_receive(:at).with(Game::Map::NORTH)
+      subject.move(Game::Map::NORTH)
     end
 
     context 'the new tile is passible' do
       it 'moves the player' do
-        subject.move(:up)
+        subject.move(Game::Map::NORTH)
         subject.tile.should == passible_tile
       end
 
       it 'move the player object from the old tile to the new tile' do
         tile.should_receive(:remove).with(subject)
         passible_tile.should_receive(:add).with(subject)
-        subject.move(:up)
+        subject.move(Game::Map::NORTH)
       end
 
       it 'process and automatic actions' do
         subject.should_receive(:take_auto_action)
-        subject.move(:up)
+        subject.move(Game::Map::NORTH)
       end
     end
 
@@ -55,13 +55,13 @@ describe Game::Player::Movements do
 
       it 'does not move the player' do
         subject.stub(:print => true)
-        subject.move(:up)
+        subject.move(Game::Map::NORTH)
         subject.tile.should == tile
       end
 
       it 'plays a beep' do
         subject.should_receive(:print).with("\a")
-        subject.move(:up)
+        subject.move(Game::Map::NORTH)
       end
     end
   end

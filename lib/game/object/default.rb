@@ -6,6 +6,7 @@ class Game
       end
 
       def initialize(options)
+        super
         @options = options
       end
 

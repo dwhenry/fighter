@@ -13,10 +13,10 @@ class Game
     end
 
     def bind_keys
-      bind_key(:w) { @player.move(:up) }
-      bind_key(:s) { @player.move(:down) }
-      bind_key(:a) { @player.move(:left) }
-      bind_key(:d) { @player.move(:right) }
+      bind_key(:w) { @player.move(Game::Map::NORTH) }
+      bind_key(:s) { @player.move(Game::Map::SOUTH) }
+      bind_key(:a) { @player.move(Game::Map::EAST) }
+      bind_key(:d) { @player.move(Game::Map::WEST) }
 
       bind_key(:' ') { @player.take_action }
 

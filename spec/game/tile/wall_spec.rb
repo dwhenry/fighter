@@ -56,16 +56,16 @@ describe Game::Tile::Wall do
     it 'allows player movement through a door with a key' do
       player.add(key)
       player.load_map(map)
-      player.move(:down)
+      player.move(Game::Map::SOUTH)
       player.tile.should == wall
-      player.move(:down)
+      player.move(Game::Map::SOUTH)
       player.tile.should == stop
     end
 
     it 'passing the wall drops the key' do
       player.add(key)
       player.load_map(map)
-      player.move(:down)
+      player.move(Game::Map::SOUTH)
       player.tile.should == wall
       player.should_not have_object(Game::Object::FeatureKey)
     end
@@ -73,8 +73,8 @@ describe Game::Tile::Wall do
     it 'passing the wall leaves the door open' do
       player.add(key)
       player.load_map(map)
-      player.move(:down)
-      player.move(:down)
+      player.move(Game::Map::SOUTH)
+      player.move(Game::Map::SOUTH)
       wall.should be_passible([])
     end
   end

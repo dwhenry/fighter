@@ -20,13 +20,13 @@ module Render
           return base unless tile.has_object?(Game::Player)
           base[0] +
           case Game::Player.instance.direction
-          when :up
+          when Game::Map::NORTH
             '^'
-          when :down
+          when Game::Map::SOUTH
             'v'
-          when :left
+          when Game::Map::EAST
             '<'
-          when :right
+          when Game::Map::WEST
             '>'
           else
             '*'
