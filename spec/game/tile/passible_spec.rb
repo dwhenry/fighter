@@ -11,6 +11,7 @@ describe Game::Tile::Passible do
     end
 
     context 'when objects' do
+      let(:unknown_passible) { mock(:object, :tile= => true) }
       let(:passible) { mock(:object, :tile= => true, :passible? => true) }
       let(:impassible) { mock(:object, :tile= => true, :passible? => false) }
 
@@ -22,6 +23,11 @@ describe Game::Tile::Passible do
       it 'false if any objects are impassible' do
         subject.add(impassible)
         subject.should_not be_passible([])
+      end
+
+      it 'true if object does not respond to passible' do
+        subject.add(unknown_passible)
+        subject.should be_passible([])
       end
     end
   end

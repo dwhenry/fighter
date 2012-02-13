@@ -21,6 +21,6 @@ describe Render::Console::DrawMessage do
   end
 
   it 'writes the game over title' do
-    output.should include('  +               Game Over                +')
+    output.should include('  +                Game Over                +')
   end
 end
