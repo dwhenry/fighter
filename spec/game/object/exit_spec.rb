@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Game::Object::Exit do
-  subject { Game::Object.instance('ExitTest', 'modules' => ['Exit'], 'next_map' => 'next')}
+  subject { Game::Object.instance('ExitTest', 'modules' => ['Exit'], 'next_map' => 'next_a')}
 
   describe '#process' do
     let(:second_map) { mock(:map) }
@@ -10,7 +10,7 @@ describe Game::Object::Exit do
     end
 
     it 'attempts to load the next map' do
-      Game::Map.should_receive(:load_map).with("maps/next")
+      Game::Map.should_receive(:load_map).with("maps/next_a")
       Game::Engine.instance.should_receive(:load_map).with(second_map)
       subject.auto_process
     end
@@ -22,4 +22,14 @@ describe Game::Object::Exit do
     end
   end
 
+  describe '#next_map_name' do
+    it 'returns the next map variable if set' do
+      subject.next_map_name.should == 'Next A'
+    end
+
+    it 'returns Game Over when no map set' do
+      no_next_map = Game::Object.instance('ExitTest', 'modules' => ['Exit'])
+      no_next_map.next_map_name.should == 'Game Over'
+    end
+  end
 end

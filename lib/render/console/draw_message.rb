@@ -5,9 +5,10 @@ module Render
         string = "\n\r\n\r"
         string << '  +----------------------------------------+' << "\n\r"
         string << '  +                                        +' << "\n\r"
-        string << '  +                Game Over               +' << "\n\r"
+        string << '  +               Game Over                +' << "\n\r"
         string << '  +  '
-        string << ((' ' * 26) + engine.message)[-36..-1]
+        len = ((36 - engine.message.length) / 2).to_i + 1
+        string << ((' ' * len) + engine.message + (' ' * len))[0..36]
         string << '  +' << "\n\r"
         string << '  +                                        +' << "\n\r"
         string << '  +----------------------------------------+' << "\n\r"

@@ -1,6 +1,10 @@
 class Game
   class Object
     module Default
+      def self.included(base)
+        base.send :attr_accessor, :location
+      end
+
       def initialize(options)
         @options = options
       end

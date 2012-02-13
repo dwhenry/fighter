@@ -1,13 +1,16 @@
 require 'lib/game/object/selector'
 
 require 'lib/game/object/default'
-require 'lib/game/object/Exit'
+require 'lib/game/object/enemy'
+require 'lib/game/object/exit'
+require 'lib/game/object/healer'
 require 'lib/game/object/inventry_item'
 require 'lib/game/object/location_modifier'
 require 'lib/game/object/passage'
 require 'lib/game/object/switcher'
 require 'lib/game/object/setter'
 require 'lib/game/object/trap'
+require 'lib/game/object/weapon'
 
 class Game
   class Object

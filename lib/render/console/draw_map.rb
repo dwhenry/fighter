@@ -2,101 +2,96 @@ module Render
   class Console
     module DrawMap
       def draw_map(engine)
-        string = ''
-        string << draw_refresh
-        string << draw_title(engine.map)
-        string << draw_board(engine.map.data)
-        string << draw_stats(engine.player)
-        string << draw_player(engine.player)
+        @output = ''
+        draw_refresh
+        draw_title(engine.map)
+        draw_board(engine.map.data)
+        draw_stats(engine.player)
+        draw_player(engine.player)
+        draw_tile(engine.player.location)
 
         system('clear')
-        @io.puts string
+        @io.puts @output
       end
 
       private
+      def append(*strings)
+        @output << strings.join
+        @output << "\n\r"
+      end
+
       def draw_stats(player)
-        string = 'Player Stats:'
-        string << "\n\r"
-        string << "  Health:   " << ("%3.f" % player.hp) << "\n\r"
-        string << "\n\r"
-        string
+        append 'Player Stats:'
+        append "  Health:   ", ("%3.f" % player.hp)
+        append
       end
 
       def draw_refresh
-        string = "Refresh Rate: "
-        if @last
-          string  << ("%3f" % (1 / (Time.now - @last)))
-        end
+        rate = @last ? ("%3f" % (1 / (Time.now - @last))) : ''
         @last = Time.now
-        string
+
+        append "Refresh Rate: ", rate
+        append
       end
 
 
       def draw_title(map)
-        string = "\n\r\n\r"
-        string << "Level: " << map.name << "\n\r"
-        string << "Goal: " << map.goal
-        string << "\n\r\n\r"
-        string
+        append "Level: ", map.name
+        append "Goal: ", map.goal
+        append
       end
 
       def draw_board(board)
-        string = "\r+"
-        board.each { string << '---'}
-        string << "+\n\r"
+        edge = ["+", '---' * board.size, "+"]
+        append *edge
         board.each do |row|
-          string << "|"
-          row.each { |location| string << draw_location(location) }
-          string << "|\n\r"
+           append "|",
+                  *row.map { |tile| Tile.new(tile).draw },
+                  "|"
         end
-        string << "+"
-        board.each { string << '---'}
-        string << "+\n\r\n\r"
-        string
+        append *edge
       end
 
       def draw_player(player)
-        string = "Inventry:\n\r"
+        append "Inventry:"
         if player.objects.empty?
-          string << "(EMPTY)"
+          append "(EMPTY)"
         else
           player.objects.each_with_index do |object, i|
-            string << "%3.f" % (i + 1) << ' - ' << object.name << "\n\r"
+            append "%3.f" % (i + 1), ' - ', object.name
           end
         end
-        string << "\n\r\n\r"
-        string
+        append
       end
 
-      def draw_location(location)
-        cell = case location.location_type
-        when Game::Location::EMPTY_CELL
-          '   '
-        when Game::Location::WALL_90
-          ' | '
-        when Game::Location::WALL_CORNER_RIGHT
-          ' +-'
-        when Game::Location::WALL_CORNER_LEFT
-          '-+ '
-        when Game::Location::WALL_0
-          '---'
-        when Game::Location::WALL_CORNER
-          '-+-'
-        else
-          ("   #{location.location_type}")[-2..-1]
+      def draw_tile(tile)
+        objects = tile.objects.dup
+        append "Location: "
+        append "  ", tile.class
+        append "Items: "
+        objects.each do |obj|
+          draw_object(obj)
         end
-        cell = 'SSS' if location.has_object?(Game::Object::Switcher)
-        cell = 'SSS' if location.has_object?(Game::Object::Setter)
-        cell = 'EEE' if location.has_object?(Game::Object::Exit)
-        cell = 'TTT' if location.has_object?(Game::Object::LocationModifier)
-        cell = '###' if location.has_object?(Game::Object::Trap)
-        if location.has_object?(Game::Object::Passage)
-          cell = 'DDD'
-          cell[1] = ' ' if location.passible?([])
+      end
+
+      def draw_object(obj)
+        append "  Healer:    ", obj.health if obj.is_a?(Game::Object::Healer)
+        append "  Trap:      ", obj.damage if obj.is_a?(Game::Object::Trap)
+        append "  Exit:      ", obj.next_map_name if obj.is_a?(Game::Object::Exit)
+        append "  Door:      ", 'OPEN' if obj.is_a?(Game::Object::Passage)
+        append "  Door Switch" if obj.is_a?(Game::Object::Switcher)
+        append "  Door Setter" if obj.is_a?(Game::Object::Setter)
+        if obj.is_a?(Game::Object::InventryItem)
+          if obj.is_a?(Game::Object::Weapon)
+            append "  Weapon:    ", classname_for(obj), '(', obj.attack, ')'
+          else
+            append "  Item:      ", classname_for(obj)
+          end
         end
-        cell = 'KKK' if defined?(Game::Object::Key) && location.has_object?(Game::Object::Key)
-        cell[1] = '*' if location.has_object?(Game::Player)
-        cell
+      end
+
+      def classname_for(obj)
+        obj.class.to_s.split('::').last
       end
     end
   end

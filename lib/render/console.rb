@@ -1,4 +1,5 @@
 require 'lib/render/console/draw_map'
+require 'lib/render/console/draw_tile'
 require 'lib/render/console/draw_message'
 
 module Render

@@ -10,6 +10,12 @@ class Game
         end
       end
 
+      def next_map_name
+        return 'Game Over' unless @options['next_map']
+
+        @options['next_map'].gsub(/((^| |_)[a-z])/) {|v| v.upcase.gsub('_', ' ')}
+      end
+
       def skip_to(name)
         Game::Engine.instance.load_map Game::Map.load_map("maps/#{name}")
       end

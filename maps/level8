@@ -1,0 +1,52 @@
+{
+  "name": "2: Follow the path",
+  "goal": "Navigate to the Exit",
+  "height": 5,
+  "width": 5,
+  "data": [
+    [0, 0, 0, 0, 0],
+    [0, 2, 3, 3, 3],
+    [0, 1, 0, 0, 0],
+    [0, 1, 0, 0, 0],
+    [0, 1, 0, 0, 0]
+  ],
+  "objects": [
+    {
+      "name": "LevelExit",
+      "x": 4,
+      "y": 0,
+      "details": {
+        "modules": ["Exit"]
+      }
+    },
+    {
+      "name": "BasicEnemy",
+      "x": 2,
+      "y": 0,
+      "details": {
+        "modules": ["Enemy"],
+        "attack": 10,
+        "health": 100
+      }
+    },
+    {
+      "name": "Knife",
+      "x": 0,
+      "y": 4,
+      "details": {
+        "modules": ["InventryItem", "Weapon"],
+        "attack": 5
+      }
+    },
+    {
+      "name": "Health",
+      "x": 0,
+      "y": 2,
+      "details": {
+        "modules": ["Healer"],
+        "health": 100
+      }
+    }
+
+  ]
+}

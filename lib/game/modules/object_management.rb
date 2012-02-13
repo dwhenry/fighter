@@ -2,6 +2,7 @@ class Game
   module Modules
     module ObjectManagement
       def add(object)
+        object.location = self
         @objects << object
       end
 

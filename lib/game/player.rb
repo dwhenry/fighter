@@ -8,7 +8,7 @@ class Game
     include Game::Player::Movements
     include Game::Modules::InstanceSetter
 
-    attr_reader :location
+    attr_accessor :location
     attr_reader :objects
     attr_reader :hp
 
@@ -25,6 +25,14 @@ class Game
       else
         @hp -= hp
       end
+    end
+
+    def heal(hp)
+      @hp += hp
+      return hp if @hp <= 100
+      used = hp - (@hp - 100)
+      @hp = 100
+      used
     end
   end
 end
