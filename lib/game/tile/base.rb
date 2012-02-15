@@ -1,17 +1,5 @@
 class Game
   class Tile
-    module Impassible
-      def passible?(player_objects)
-        false
-      end
-    end
-
-    module Passible
-      def passible?(player_objects)
-        objects.all?(&:passible?)
-      end
-    end
-
     module Base
       def self.included(base)
         base.send :attr_accessor, :tile_type
@@ -19,6 +7,7 @@ class Game
       end
 
       def initialize(tile_type, x, y)
+        super
         @tile_type = tile_type
         @x = x
         @y = y

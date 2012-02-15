@@ -12,8 +12,8 @@ class Game
     attr_reader :objects
     attr_reader :hp
 
-    def initialize
-      super
+    def initialize(*args)
+      super(*args)
       @objects = []
       @hp = 100
     end

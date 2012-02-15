@@ -21,6 +21,8 @@ class Game
     end
 
     def take_turn
+      active_objects = Game::Object.engine_objects(map.name)[Game::Object::ACTIVE]
+      active_objects.each {|obj| obj.active_turn }
     end
 
     def ended?

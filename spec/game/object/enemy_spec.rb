@@ -14,12 +14,6 @@ describe Game::Object::Enemy do
     end
   end
 
-  describe '#status' do
-    it 'is idle when left alone' do
-      subject.status.should == Game::Object::IDLE
-    end
-  end
-
   describe '#initialization' do
     it 'added as an idle object' do
       Game::Object.should_receive(:add).with('map_name', Game::Object::IDLE, subject)
@@ -99,6 +93,26 @@ describe Game::Object::Enemy do
         back_tile.should_receive(:add).with(subject)
         subject.active_turn
       end
+    end
+  end
+
+  context '#damage' do
+    let(:tile) { Game::Tile.build(0, 0, 0) }
+    before { tile.add(subject) }
+
+    it 'reduces the objects health' do
+      subject.damage(25)
+      subject.hp.should == 75
+    end
+
+    it 'has a minimum health of 0' do
+      subject.damage(101)
+      subject.hp.should == 0
+    end
+
+    it 'removes the object from the game if the player hitpoints goes below 0' do
+      subject.damage(101)
+      tile.objects.should_not include subject
     end
   end
 end

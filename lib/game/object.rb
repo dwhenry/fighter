@@ -1,4 +1,5 @@
 require 'lib/game/object/selector'
+require 'lib/game/object/status'
 
 require 'lib/game/object/default'
 require 'lib/game/object/enemy'
@@ -50,6 +51,10 @@ class Game
 
       def add(level, status, obj)
         engine_objects(level)[status] << obj
+      end
+
+      def remove(level, status, obj)
+        engine_objects(level)[status].delete(obj)
       end
 
       def clear

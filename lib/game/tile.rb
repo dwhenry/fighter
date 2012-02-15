@@ -1,4 +1,4 @@
-require 'lib/game/tile/modules'
+require 'lib/game/tile/base'
 require 'lib/game/tile/movement'
 require 'lib/game/tile/passible'
 

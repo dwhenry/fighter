@@ -2,11 +2,19 @@ class Game
   module Modules
     module ObjectManagement
       def add(object)
-        object.tile = self
+        if self.is_a?(Game::Player)
+          object.player = self if object.respond_to?(:player)
+          object.tile = nil
+        else
+          object.player = nil if object.respond_to?(:player)
+          object.tile = self
+        end
         @objects << object
       end
 
       def remove(object)
+        object.player = nil if object.respond_to?(:player)
+        object.tile = nil
         @objects.delete(object)
       end
 

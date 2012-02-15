@@ -6,9 +6,8 @@ class Game
           tile.remove(obj)
           add(obj)
         end
-        objects_to_responding_to(:process).each do |obj|
-          obj.process
-        end
+        objects_to_responding_to(:process).each(&:process)
+        weapons.each(&:use)
       end
 
       def take_auto_action
@@ -26,6 +25,11 @@ class Game
         tile.objects.select {|obj| obj.respond_to?(method) }
       end
       private :objects_to_responding_to
+
+      def weapons
+        objects.select {|obj| obj.is_a?(Game::Object::Weapon) }
+      end
+      private :weapons
     end
   end
 end

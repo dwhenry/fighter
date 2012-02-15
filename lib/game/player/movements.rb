@@ -5,6 +5,11 @@ class Game
         base.send :attr_reader, :direction
       end
 
+      def initialize(*args)
+        super(*args)
+        @direction = Game::Map::NORTH
+      end
+
       def load_map(map)
         @map = map
         @tile = @map.start_tile

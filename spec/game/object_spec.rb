@@ -37,5 +37,16 @@ describe Game::Object do
         Game::Object.engine_objects('test_map').should == {Game::Object::IDLE => [:object_here], Game::Object::ACTIVE => []}
       end
     end
+
+    describe '#remove' do
+      before { Game::Object.clear }
+
+      it 'adds the object to the list of engine run objects' do
+        Game::Object.add('test_map', Game::Object::IDLE, :object_here)
+        Game::Object.remove('test_map', Game::Object::IDLE, :object_here)
+
+        Game::Object.engine_objects('test_map').should == {Game::Object::IDLE => [], Game::Object::ACTIVE => []}
+      end
+    end
   end
 end

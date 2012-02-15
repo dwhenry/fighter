@@ -6,6 +6,7 @@ class Game
       end
 
       def initialize(*args)
+        super(*args)
         self.class.set(self)
       end
 

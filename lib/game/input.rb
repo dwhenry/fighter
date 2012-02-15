@@ -18,6 +18,11 @@ class Game
       bind_key(:a) { @player.move(Game::Map::EAST) }
       bind_key(:d) { @player.move(Game::Map::WEST) }
 
+      bind_key(:W) { @player.move(Game::Map::NORTH) }
+      bind_key(:S) { @player.move(Game::Map::SOUTH) }
+      bind_key(:A) { @player.move(Game::Map::EAST) }
+      bind_key(:D) { @player.move(Game::Map::WEST) }
+
       bind_key(:' ') { @player.take_action }
 
       bind_key(:'1') { skip_to('level5') }

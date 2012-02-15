@@ -35,7 +35,7 @@ class Game
     @render.draw_message(@engine)
   end
 
-  def run_thread(pause=0.05)
+  def run_thread(pause=0.03)
     Thread.new do
       loop do
         yield

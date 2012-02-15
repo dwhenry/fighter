@@ -6,7 +6,7 @@ class Game
       end
 
       def name
-        @options['name'] || self.class.to_s
+        @options['name'] || self.class.to_s.split('::').last
       end
 
       def use

@@ -77,7 +77,7 @@ describe Render::Console::DrawMap do
 
       it 'when player is on the tile' do
         tile.add(Game::Player.new)
-        output.should include "| * |"
+        output.should include "| ^ |"
       end
 
       it 'when the tile is the exit' do
@@ -88,7 +88,7 @@ describe Render::Console::DrawMap do
       it 'when the tile is the exit and the player is on it' do
         tile.add(Game::Player.new)
         tile.add(exit)
-        output.should include "|E*E|"
+        output.should include "|E^E|"
       end
 
       it 'when the tile is a transport' do
@@ -99,7 +99,7 @@ describe Render::Console::DrawMap do
       it 'when the tile is a transport and the player is on it' do
         tile.add(Game::Player.new)
         tile.add(transport)
-        output.should include "|T*T|"
+        output.should include "|T^T|"
       end
 
       it 'when the tile is a door' do
@@ -115,7 +115,7 @@ describe Render::Console::DrawMap do
       it 'when the tile is an open door and the player is on it' do
         wall_tile.add(Game::Player.new)
         wall_tile.add(open_door)
-        output(Game::Tile::WALL_0).should include "|D*D|"
+        output(Game::Tile::WALL_0).should include "|D^D|"
       end
 
       it 'when the tile is a switcher' do
@@ -126,7 +126,7 @@ describe Render::Console::DrawMap do
       it 'when the tile is a switcher and the player is on it' do
         tile.add(Game::Player.new)
         tile.add(switcher)
-        output.should include "|S*S|"
+        output.should include "|S^S|"
       end
 
       it 'when the tile is a setter' do
@@ -137,7 +137,7 @@ describe Render::Console::DrawMap do
       it 'when the tile is a switcher and the player is on it' do
         tile.add(Game::Player.new)
         tile.add(setter)
-        output.should include "|S*S|"
+        output.should include "|S^S|"
       end
 
       it 'when the tile is a trap' do
@@ -148,7 +148,7 @@ describe Render::Console::DrawMap do
       it 'when the tile is a trap and the player is on it' do
         tile.add(Game::Player.new)
         tile.add(trap)
-        output.should include "|#*#|"
+        output.should include "|#^#|"
       end
     end
 
@@ -160,9 +160,17 @@ describe Render::Console::DrawMap do
         output.should include "(EMPTY)"
       end
 
-      it 'display item names when they exist' do
-        player.stub(:objects => [mock(:object, :name => 'Blue Key')])
-        output.should include "  1 - Blue Key"
+      context 'display item names when they exist' do
+        it 'with highlight when selected item' do
+          player.stub(:objects => [mock(:object, :name => 'Blue Key')])
+          output.should include "\e[7m  Blue Key     \e[m"
+        end
+
+        it 'without highlight when not selected' do
+          player.stub(:objects => [mock(:object, :name => 'Blue Key'),
+                                   mock(:object, :name => 'Green Key')])
+          output.should include "  Green Key    "
+        end
       end
     end
   end
