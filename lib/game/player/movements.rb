@@ -6,7 +6,7 @@ class Game
       end
 
       def initialize(*args)
-        super(*args)
+        super
         @direction = Game::Map::NORTH
       end
 

@@ -1,6 +1,15 @@
 class Game
   module Modules
     module ObjectManagement
+      def self.included(base)
+        base.send :attr_reader, :objects
+      end
+
+      def initialize(*args)
+        super
+        @objects = []
+      end
+
       def add(object)
         if self.is_a?(Game::Player)
           object.player = self if object.respond_to?(:player)
