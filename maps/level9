@@ -1,0 +1,111 @@
+{
+  "name": "2: Follow the path",
+  "goal": "Navigate to the Exit",
+  "height": 5,
+  "width": 5,
+  "data": [
+    [0, 0, 0, 0, 0],
+    [0, 2, 3, 3, 3],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0]
+  ],
+  "objects": [
+    {
+      "name": "LevelExit",
+      "x": 4,
+      "y": 4,
+      "details": {
+        "modules": ["Exit"]
+      }
+    },
+    {
+      "name": "BasicEnemy",
+      "x": 3,
+      "y": 0,
+      "details": {
+        "modules": ["Enemy"],
+        "attack": 5,
+        "health": 100
+      }
+    },
+    {
+      "name": "BasicEnemy",
+      "x": 3,
+      "y": 0,
+      "details": {
+        "modules": ["Enemy"],
+        "attack": 5,
+        "health": 100
+      }
+    },
+    {
+      "name": "BasicEnemy",
+      "x": 3,
+      "y": 0,
+      "details": {
+        "modules": ["Enemy"],
+        "attack": 5,
+        "health": 100
+      }
+    },
+    {
+      "name": "BasicEnemy",
+      "x": 3,
+      "y": 0,
+      "details": {
+        "modules": ["Enemy"],
+        "attack": 5,
+        "health": 100
+      }
+    },
+    {
+      "name": "BasicEnemy",
+      "x": 3,
+      "y": 3,
+      "details": {
+        "modules": ["Enemy"],
+        "attack": 10,
+        "health": 100
+      }
+    },
+    {
+      "name": "BasicEnemy",
+      "x": 3,
+      "y": 4,
+      "details": {
+        "modules": ["Enemy"],
+        "attack": 15,
+        "health": 100
+      }
+    },
+    {
+      "name": "BasicEnemy",
+      "x": 4,
+      "y": 3,
+      "details": {
+        "modules": ["Enemy"],
+        "attack": 15,
+        "health": 100
+      }
+    },
+    {
+      "name": "Sword",
+      "x": 0,
+      "y": 2,
+      "details": {
+        "modules": ["InventryItem", "Weapon"],
+        "attack": 20
+      }
+    },
+    {
+      "name": "Health",
+      "x": 0,
+      "y": 4,
+      "details": {
+        "modules": ["Healer"],
+        "health": 200
+      }
+    }
+  ]
+}

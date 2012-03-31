@@ -56,7 +56,7 @@ module Render
 
         def draw_wall
           if tile.has_object?(Game::Object::Passage)
-            return 'D D' if tile.passible?([])
+            return 'D D' if tile.passible?
             return 'DDD'
           end
 

@@ -4,6 +4,7 @@ describe Game::Player::Movements do
   subject { Game::Player.new }
   let(:map) { mock(:map, :start_tile => tile) }
   let(:tile) { mock(:tile, :add => true, :remove => true) }
+  before { Game::Tile.clear }
 
   describe '#load_map' do
     it 'sets the player start tile' do

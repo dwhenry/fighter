@@ -161,6 +161,10 @@ describe Render::Console::DrawMap do
       end
 
       context 'display item names when they exist' do
+        before do
+          player.stub(:equiped? => false)
+        end
+
         it 'with highlight when selected item' do
           player.stub(:objects => [mock(:object, :name => 'Blue Key')])
           output.should include "\e[7m  Blue Key     \e[m"
@@ -170,6 +174,14 @@ describe Render::Console::DrawMap do
           player.stub(:objects => [mock(:object, :name => 'Blue Key'),
                                    mock(:object, :name => 'Green Key')])
           output.should include "  Green Key    "
+        end
+
+        context 'when object is equiped' do
+          it 'is marked as equiped' do
+            player.stub(:objects => [mock(:object, :name => 'Blue Key', :on => true)],
+                        :equiped? => true)
+            output.should include "\e[7m  Blue Key     (Equiped)\e[m"
+          end
         end
       end
     end

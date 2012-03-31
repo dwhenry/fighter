@@ -1,9 +1,11 @@
 class Game
   class Map
-    NORTH = :north
-    SOUTH = :south
-    EAST = :east
-    WEST = :west
+    DIRECTIONS = [
+      NORTH = :north,
+      SOUTH = :south,
+      EAST = :east,
+      WEST = :west
+    ]
 
     def self.load_map(filename)
       new(filename)

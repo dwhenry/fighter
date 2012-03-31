@@ -92,7 +92,7 @@ module Render
         if active.size > 0
           append "Active Enemies: ", active.size
           active.each do |enemy|
-            append space(classname_for(enemy)), enemy.hp
+            draw_inventry_object(Game::Player.instance, enemy)
           end
         end
       end

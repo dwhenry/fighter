@@ -11,14 +11,61 @@ class Game
       end
 
       def direction_to(tile)
-        diff_x = x - tile.x
-        diff_y = y - tile.y
+        directions_to(tile).first
+      end
 
-        if diff_x.abs > diff_y.abs
-          diff_x > 0 ? Game::Map::NORTH : Game::Map::SOUTH
-        else
-          diff_y > 0 ? Game::Map::WEST : Game::Map::EAST
+      def elements_within(distance)
+        Path.new(self).elements(distance)
+      end
+
+      def directions_to(tile)
+        Path.new(self, tile).directions
+      end
+
+      class Path
+        def initialize(start, goal=nil)
+          @goal = goal
+          @paths = {start => {:distance => 0, :path => []}}
         end
+
+        def directions
+          until found_goal do
+            return [] unless try_paths { |tile| tile.passible? }
+          end
+          @paths[@goal][:path]
+        end
+
+        def elements(distance)
+          (1..distance).each do
+            break unless try_paths { |tile| tile.activatable? }
+          end
+          @paths.keys
+        end
+
+        def try_paths(&blk)
+          @paths.to_a.map do |location, details|
+            Game::Map::DIRECTIONS.map do |direction|
+              location.try_path(@paths, direction, details, &blk)
+            end.any?
+          end.any?
+        end
+
+        private
+        def found_goal
+          !!@paths[@goal]
+        end
+      end
+
+      def try_path(paths, direction, details)
+        tile = at(direction)
+        return false unless yield(tile)
+        !!tile.try_tile(paths, direction, details)
+      end
+
+      def try_tile(paths, direction, details)
+        distance = (details[:distance] + 1)
+        return false if paths[self] && paths[self][:distance] <= distance
+        paths[self] = {:distance => distance, :path => (details[:path].dup + [direction])}
       end
 
       def in_range?(tile, max=10)

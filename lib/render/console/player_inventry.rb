@@ -10,20 +10,21 @@ module Render
           append "(EMPTY)"
         else
           player.objects.each do |object|
-            draw_inventry_object(object)
+            @selected ||= object
+            draw_inventry_object(player, object)
           end
         end
         append
       end
 
-      def draw_inventry_object(obj)
-        @selected ||= obj
+      def draw_inventry_object(player, obj)
         options = @selected == obj ? {:color => :invert} : []
         strings = [space(classname_for(obj))]
         details = []
         details << "Att: #{obj.attack}" if obj.respond_to?(:attack)
         details << "HP:  #{obj.hp}" if obj.respond_to?(:hp)
-        strings << '(' << details << ')' unless details.empty?
+        details << "Equiped" if obj.respond_to?(:on) && player.equiped?(obj)
+        strings << '(' << details.join(', ') << ')' unless details.empty?
         append *strings, options
       end
 

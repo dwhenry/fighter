@@ -3,6 +3,7 @@ class Game
     module Movements
       def self.included(base)
         base.send :attr_reader, :direction
+        base.send :attr_accessor, :tile
       end
 
       def initialize(*args)
