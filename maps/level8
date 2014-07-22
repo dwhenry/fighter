@@ -1,6 +1,6 @@
 {
-  "name": "2: Follow the path",
-  "goal": "Navigate to the Exit",
+  "name": "8: Defeat the monster",
+  "goal": "Use the knife.. kill the enemy..",
   "height": 5,
   "width": 5,
   "data": [
@@ -16,7 +16,8 @@
       "x": 4,
       "y": 0,
       "details": {
-        "modules": ["Exit"]
+        "modules": ["Exit"],
+        "next_map": "level9"
       }
     },
     {
