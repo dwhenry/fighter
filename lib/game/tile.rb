@@ -18,7 +18,6 @@ class Game
     class << self
       def build(tile_type, x, y)
         @board ||= {}
-        puts tile_type, class_for(tile_type)
         @board[[x, y]] = class_for(tile_type).new(tile_type, x, y)
       end
 
