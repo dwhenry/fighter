@@ -4,12 +4,18 @@ class Game
       @player = engine.player
       @engine = engine
       @editor = RawLine::Editor.new(STDIN, StringIO.new)
-
+      @keys = {}
       bind_keys
     end
 
     def read
-      @editor.read
+      system('stty raw -echo') # => Raw mode, no echo
+      char = (STDIN.read_nonblock(1).ord rescue nil)
+      system('stty -raw echo') # => Reset terminal mode
+      @keys[char].call if char
+      # return char
+
+      # @editor.read('=>', true)
     end
 
     def bind_keys
@@ -35,14 +41,17 @@ class Game
 
     def bind_key(key, &block)
       @editor.terminal.keys[key] = [key.to_s.ord]
-      @editor.bind(key) { block.call }
+      @editor.bind(key, &block)
+      @keys[key.to_s.ord] = block
     end
+
     private :bind_key
 
     def skip_to(name)
       @exit ||= Game::Object.instance('SkipExit', 'modules' => ['Exit'])
       @exit.skip_to(name)
     end
+
     private :skip_to
   end
 end

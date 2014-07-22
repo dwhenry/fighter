@@ -7,7 +7,7 @@ class Game
       end
 
       def initialize(tile_type, x, y)
-        super
+        super()
         @tile_type = tile_type
         @x = x
         @y = y

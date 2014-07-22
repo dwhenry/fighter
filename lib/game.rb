@@ -11,7 +11,8 @@ require 'lib/game/object'
 
 require 'json'
 require 'rawline'
-require 'ruby-debug'
+# require 'ruby-debug'
+require 'pry-nav'
 
 class Game
   attr_reader :engine
@@ -27,7 +28,7 @@ class Game
     threads = []
     threads << run_thread { @render.draw_map(@engine) }
     threads << run_thread(1) { @engine.take_turn }
-    threads << run_thread(1) { @inputs.read }
+    threads << run_thread { @inputs.read }
     until @engine.ended?
       sleep 0.01
     end

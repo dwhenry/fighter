@@ -7,7 +7,7 @@ class Game
 
       def initialize(options)
         @options = options
-        super
+        super()
       end
 
       def id

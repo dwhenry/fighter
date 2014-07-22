@@ -3,4 +3,4 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'rspec'
 require 'game'
-require 'ruby-debug'
+# require 'ruby-debug'
