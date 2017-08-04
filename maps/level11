@@ -1,0 +1,16 @@
+{
+  "name": "11: Fog of war",
+  "goal": "Navigate to the Exit",
+  "height": 20,
+  "width": 20,
+  "data": "generate",
+  "fog_of_war": true,
+  "objects": [
+    {
+      "name": "LevelExit",
+      "details": {
+        "modules": ["Exit"]
+      }
+    }
+  ]
+}

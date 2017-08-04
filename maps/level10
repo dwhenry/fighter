@@ -1,0 +1,16 @@
+{
+  "name": "10: Random map",
+  "goal": "Navigate to the Exit",
+  "height": 20,
+  "width": 20,
+  "data": "generate",
+  "objects": [
+    {
+      "name": "LevelExit",
+      "details": {
+        "modules": ["Exit"]
+        "next_map": "level11"
+      }
+    }
+  ]
+}

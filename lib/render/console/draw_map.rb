@@ -2,6 +2,7 @@ module Render
   class Console
     module DrawMap
       ITEM_WIDTH = 15
+
       def draw_map(engine)
         @output = "\e[2J\e[f"
         draw_refresh
@@ -12,18 +13,18 @@ module Render
         draw_tile(engine.player.tile)
         draw_enemies(engine.map)
 
-        # system('clear')
         @io.puts @output
       end
 
       private
+
       def append(*strings)
         options = strings.last.is_a?(Hash) ? strings.pop : {}
-        if options[:color] == :invert
-          @output << invert(strings.join)
-        else
-          @output << strings.join
-        end
+        @output << if options[:color] == :invert
+                     invert(strings.join)
+                   else
+                     strings.join
+                   end
         @output << "\n\r"
       end
 
@@ -52,7 +53,7 @@ module Render
         edge = ["+", '---' * board.size, "+"]
         append *edge
         board.each do |row|
-           append "|",
+          append "|",
                   *row.map { |tile| Tile.new(tile).draw },
                   "|"
         end
@@ -81,7 +82,7 @@ module Render
           details = [space("Weapon:"), space(classname_for(obj))]
           (details << "Att: #{obj.attack}") if obj.respond_to?(:attack)
           (details << "HP: #{obj.hp}") if obj.respond_to?(:hp)
-          append *details
+          append(*details)
         end
       end
 

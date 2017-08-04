@@ -9,7 +9,9 @@ module Render
         end
 
         def draw
-          if tile.is_a?(Game::Tile::Wall)
+          if tile.fog
+            ' ? '
+          elsif tile.is_a?(Game::Tile::Wall)
             draw_player(draw_wall)
           else
             draw_player(draw_empty)
@@ -45,7 +47,7 @@ module Render
             Game::Object::Enemy             => '|:P',
             Game::Object::Healer            => '+++',
             Game::Object::Weapon            => '+--'
-            }.each do |module_name, tile_piece|
+          }.each do |module_name, tile_piece|
 
             return tile_piece if tile.has_object?(module_name)
           end
@@ -65,7 +67,9 @@ module Render
             Game::Tile::WALL_CORNER_RIGHT => ' +-',
             Game::Tile::WALL_CORNER_LEFT  => '-+ ',
             Game::Tile::WALL_0            => '---',
-            Game::Tile::WALL_CORNER       => '-+-'
+            Game::Tile::WALL_CORNER       => '-+-',
+            Game::Tile::WALL_END          => ' + ',
+            Game::Tile::WALL_SPOT         => ' X '
           }[tile.tile_type] || (debugger)
         end
       end

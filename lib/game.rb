@@ -6,13 +6,14 @@ require 'lib/game/engine'
 require 'lib/game/input'
 require 'lib/game/player'
 require 'lib/game/map'
+require 'lib/game/map_builder'
 require 'lib/game/tile'
 require 'lib/game/object'
 
 require 'json'
 require 'rawline'
-# require 'ruby-debug'
-require 'pry-nav'
+
+require 'pry'
 
 class Game
   attr_reader :engine
@@ -26,7 +27,7 @@ class Game
   def play
     Thread.abort_on_exception = true
     threads = []
-    threads << run_thread { @render.draw_map(@engine) }
+    threads << run_thread(0.02) { @render.draw_map(@engine) }
     threads << run_thread(1) { @engine.take_turn }
     threads << run_thread { @inputs.read }
     until @engine.ended?

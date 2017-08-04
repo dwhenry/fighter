@@ -17,6 +17,7 @@
       "y": 4,
       "details": {
         "modules": ["Exit"]
+        "next_map": "level10"
       }
     },
     {

@@ -15,6 +15,7 @@ class Game
         @map = map
         @tile = @map.start_tile
         @tile.add(self)
+        @map.clear_fog(tile)
       end
 
       def move(direction)
@@ -32,6 +33,7 @@ class Game
       def move_to(tile)
         @tile.remove(self)
         @tile = tile
+        @map.clear_fog(tile)
         @tile.add(self)
       end
     end

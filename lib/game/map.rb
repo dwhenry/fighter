@@ -14,6 +14,7 @@ class Game
     def initialize(filename)
       file_data = File.read(filename)
       @map_data = JSON.parse(file_data)
+      data
       setup_objects
     end
 
@@ -22,6 +23,9 @@ class Game
       objects.each do |object|
         at(object['x'], object['y']).add Game::Object.instance(object['name'], object['details'] || {})
       end
+    rescue
+      binding.pry
+      puts 'a'
     end
 
     def data
@@ -33,7 +37,8 @@ class Game
     end
 
     def at(x, y)
-      data[x][y]
+      return nil if x < 0 || y < 0
+      data[x] && data[x][y]
     end
 
     def method_missing(method, *args, &blk)
@@ -45,14 +50,39 @@ class Game
       at(0, 0)
     end
 
+    def clear_fog(tile)
+      (-1..1).each do |offset_y|
+        (-1..1).each do |offset_x|
+          if offset_x.abs + offset_y.abs <= 2
+            t = at(tile.x + offset_x, tile.y + offset_y)
+            t && t.fog = false
+          end
+        end
+      end
+      # 0 0 1 0 0
+      # 0 1 1 1 0
+      # 1 1 1 1 1
+      # 0 1 1 1 0
+      # 0 0 1 0 0
+
+    end
+
     private
+
     def build_data
       Game::Tile.clear
       map = []
-      @map_data['data'].each_with_index do |row, x|
+      data = if @map_data['data'] == 'generate'
+               builder = MapBuilder.new(height, width)
+               @map_data['objects'] = builder.place_objects(@map_data['objects'])
+               builder.map
+             else
+               @map_data['data']
+             end
+      data.each_with_index do |row, x|
         row_items = []
         row.each_with_index do |tile, y|
-          row_items << Game::Tile.build(tile, x, y)
+          row_items << Game::Tile.build(tile, x, y, !!@map_data['fog_of_war'])
         end
         map << row_items
       end

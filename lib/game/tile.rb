@@ -9,25 +9,28 @@ require 'lib/game/tile/wall'
 class Game
   class Tile
     EMPTY_CELL = 0
-    WALL_90 = 1
-    WALL_CORNER_LEFT = 4
-    WALL_CORNER_RIGHT = 2
-    WALL_CORNER = 5
-    WALL_0 = 3
+    WALL = [
+      WALL_90 = 1,
+      WALL_CORNER_LEFT = 4,
+      WALL_CORNER_RIGHT = 2,
+      WALL_CORNER = 5,
+      WALL_0 = 3,
+      WALL_END = 6,
+      WALL_SPOT = 7,
+    ].freeze
 
     class << self
-      def build(tile_type, x, y)
+      def build(tile_type, x, y, fog)
         @board ||= {}
-        @board[[x, y]] = class_for(tile_type).new(tile_type, x, y)
+        @board[[x, y]] = class_for(tile_type).new(tile_type, x, y, fog)
       end
 
       def class_for(tile_type)
         case tile_type
-        when WALL_0, WALL_90, WALL_CORNER_RIGHT,
-             WALL_CORNER_LEFT, WALL_CORNER
-          Wall
         when EMPTY_CELL
           Empty
+        when *WALL
+          Wall
         else
           raise 'unknown???'
         end

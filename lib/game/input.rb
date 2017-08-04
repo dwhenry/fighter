@@ -12,10 +12,7 @@ class Game
       system('stty raw -echo') # => Raw mode, no echo
       char = (STDIN.read_nonblock(1).ord rescue nil)
       system('stty -raw echo') # => Reset terminal mode
-      @keys[char].call if char
-      # return char
-
-      # @editor.read('=>', true)
+      @keys[char].call if @keys[char]
     end
 
     def bind_keys
@@ -31,10 +28,14 @@ class Game
 
       bind_key(:' ') { @player.take_action }
 
+      bind_key(:q) { @engine.end('Game terminated') }
+      bind_key(:Q) { @engine.end('Game terminated') }
+
       bind_key(:'1') { skip_to('level9') }
       bind_key(:'2') { skip_to('level6') }
       bind_key(:'3') { skip_to('level7_a') }
       bind_key(:'4') { skip_to('level8') }
+      bind_key(:'5') { skip_to('level11') }
 
       @editor.bind(:ctrl_x) { puts "Exiting..."; exit }
     end
