@@ -8,6 +8,7 @@ class Game
       end
       @end_point = [height - 1, width - 1]
       @endpoints = []
+      @start_location = start_location
       add_paths
     end
 
@@ -35,14 +36,14 @@ class Game
     end
 
     def add_paths
-      location = [0, 2]
-      @map[0][0] = 0
-      @map[0][1] = 0
-      @map[0][2] = 0
+      location = [@start_location[0], @start_location[1] + 2]
+      @map[@start_location[0]][@start_location[1]] = 0
+      @map[@start_location[0]][@start_location[1] + 1] = 0
+      @map[@start_location[0]][@start_location[1] + 2] = 0
 
-      branches = [[[0, 0], 0]]
+      branches = [[location, 0]]
       terminated = []
-      steps = 0
+      steps = 2
 
       while true do
         action = next_action(branches, location)

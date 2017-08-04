@@ -47,7 +47,11 @@ class Game
     end
 
     def start_tile
-      at(0, 0)
+      at(*start_location)
+    end
+
+    def start_location
+      @map_data['start_location'] || [0, 0]
     end
 
     def clear_fog(tile)
@@ -59,12 +63,6 @@ class Game
           end
         end
       end
-      # 0 0 1 0 0
-      # 0 1 1 1 0
-      # 1 1 1 1 1
-      # 0 1 1 1 0
-      # 0 0 1 0 0
-
     end
 
     private
@@ -73,7 +71,7 @@ class Game
       Game::Tile.clear
       map = []
       data = if @map_data['data'] == 'generate'
-               builder = MapBuilder.new(height, width)
+               builder = MapBuilder.new(height, width, start_location)
                @map_data['objects'] = builder.place_objects(@map_data['objects'])
                builder.map
              else

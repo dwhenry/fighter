@@ -27,7 +27,7 @@ class Game
   def play
     Thread.abort_on_exception = true
     threads = []
-    threads << run_thread(0.02) { @render.draw_map(@engine) }
+    threads << run_thread(0.01) { @render.draw_map(@engine) }
     threads << run_thread(1) { @engine.take_turn }
     threads << run_thread { @inputs.read }
     until @engine.ended?

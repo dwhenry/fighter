@@ -35,7 +35,7 @@ class Game
       bind_key(:'2') { skip_to('level6') }
       bind_key(:'3') { skip_to('level7_a') }
       bind_key(:'4') { skip_to('level8') }
-      bind_key(:'5') { skip_to('level11') }
+      bind_key(:'5') { skip_to('level12') }
 
       @editor.bind(:ctrl_x) { puts "Exiting..."; exit }
     end
